@@ -14,5 +14,5 @@ def get_customers_route():
 def get_customer_route(customer_id):
     response = get_customer_by_id(customer_id)
     if not response:
-        return jsonify({"error": "Customer not found"}), 404
+        return jsonify({"error": "Customer not found :c "}), 404
     return jsonify(response)
