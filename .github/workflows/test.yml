@@ -30,11 +30,16 @@ jobs:
             sudo docker stop read_customer_service || true
             sudo docker rm read_customer_service || true
             
-            # Descargar la última imagen del contenedor desde Docker Hub
+            # Descargar la última imagen desde Docker Hub
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/projectawsrestaurant-readcustomer:latest
             
-            # Ejecutar el contenedor actualizado en el puerto 5000, en modo "detached" y reiniciar automáticamente
-            sudo docker run -d -p 5000:5000 --name read_customer_service --restart always ${{ secrets.DOCKER_USERNAME }}/projectawsrestaurant-readcustomer:latest
+            # Ejecutar el contenedor con las variables de entorno del archivo .env
+            sudo docker run -d \
+              --name read_customer_service \
+              --env-file /home/ubuntu/read_customer_service/.env \
+              -p 5000:5000 \
+              --restart always \
+              ${{ secrets.DOCKER_USERNAME }}/projectawsrestaurant-readcustomer:latest
             
-            # Asegúrate de que el contenedor se esté ejecutando
+            # Asegurarse de que el contenedor está corriendo
             sudo docker ps
