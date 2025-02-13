@@ -1,4 +1,5 @@
 name: Deploy to AWS
+
 # Se ejecutará solo cuando hagas push a la rama 'test'
 on:
   push:
@@ -32,10 +33,10 @@ jobs:
             sudo docker stop readcustomer || true
             sudo docker rm readcustomer || true
             
-            # Descargar la última imagen
+            # Descargar la última imagen del contenedor desde Docker Hub
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/projectawsrestaurant-readcustomer:latest
             
-            # Ejecutar el contenedor en el puerto 5000, en modo "detached" y reiniciar automáticamente
+            # Ejecutar el contenedor actualizado en el puerto 5000, en modo "detached" y reiniciar automáticamente
             sudo docker run -d -p 5000:5000 --name readcustomer --restart unless-stopped ${{ secrets.DOCKER_USERNAME }}/projectawsrestaurant-readcustomer:latest
             
             # Asegúrate de que el contenedor se esté ejecutando
