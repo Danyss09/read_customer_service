@@ -4,8 +4,8 @@ from controllers.customer_controller import customer_bp
 
 app = Flask(__name__)
 
-# Permitir solo el dominio de tu frontend
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# Permitir solicitudes de cualquier origen
+CORS(app)  # Esto permitirá todos los orígenes
 
 # Register Blueprint
 app.register_blueprint(customer_bp)
