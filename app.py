@@ -1,6 +1,7 @@
 from flask import Flask
-from controllers.customer_controller import customer_bp
 from flask_cors import CORS
+from controllers.customer_controller import customer_bp
+
 app = Flask(__name__)
 CORS(app)  
 # Register Blueprint
